@@ -46,12 +46,16 @@ auto_sync_branch () {
   remoteBranch="origin/$1"
   # local lastcommithash="$(git rev-parse origin/$branch)" #this is giving error
   # echo "last commit $lastcommithash"
-  if [ x"$(git rev-parse $branch)" = x"$(git rev-parse $remoteBranch)" ]
+  localCommit=$(git rev-parse $branch)
+  remoteCommit=$(git rev-parse $remoteBranch)
+  if [ x"$localCommit" = x"$remoteCommit" ]
   then
-    echo "$(git rev-parse $branch) "
-    echo "$(git rev-parse $remoteBranch)"
+    echo "$localCommit"
+    echo "$remoteCommit"
   else 
-    echo "out of sync remote"
+    echo "out of sync remote "
+    echo "local $localCommit"
+    echo "remote $remoteCommit"
   fi
 }
 
