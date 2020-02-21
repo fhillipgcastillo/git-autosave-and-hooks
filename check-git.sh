@@ -29,7 +29,8 @@ auto_push_wip_changes(){
 }
 
 verify_auto_push () {
-  local LASTCOMMIT="$(git log -1 --oneline)"
+  local branch="$(git rev-parse --abbrev-ref HEAD)"
+  local LASTCOMMIT="$(git rev-parse origin/$branch)"
   echo "last commit $LASTCOMMIT"
 }
 
