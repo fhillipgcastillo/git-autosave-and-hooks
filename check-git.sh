@@ -28,13 +28,13 @@ verify_to_autocommit () {
 
 verify_and_auto_create_remote_branch () {
   local branch=$1
-  exist=$(git ls-remote --head origin $branch)
+  exist=$(git ls-remote --head $REMOTE $branch)
   if [ -z "$exist" ]
     then 
       msg = "branch doesn't exist"
       save_logfile "$msg"
       echo msg
-      push="$(git push origin $branch)"
+      push="$(git push $REMOTE $branch)"
       save_logfile "branch created to remote"
       save_logfile "$branch"
       echo "$push"
@@ -46,20 +46,19 @@ verify_and_auto_create_remote_branch () {
 auto_sync_branch () {
   echo "auto sync $1"
   branch="$1"
-  remoteBranch="origin/$1"
-  # local lastcommithash="$(git rev-parse origin/$branch)" #this is giving error
-  # echo "last commit $lastcommithash"
+  remoteBranch="$REMOTE/$1"
   localCommit=$(git rev-parse $branch)
   remoteCommit=$(git rev-parse $remoteBranch)
   if [ x"$localCommit" = x"$remoteCommit" ]
   then
     echo "changes are on sync"
   else 
-    echo "syncing branch"
-    # echo "local $localCommit"
-    # echo "remote $remoteCommit"
-    save_logfile "Syncing branch commits"
-    push=$(git push origin $branch)
+    echo "syncing branch commits"
+    echo "pulling..."
+    save_logfile "Syncing branch commits..."
+    pull=$(git pull $REMOTE $branch)
+    save_logfile "$pull"
+    push=$(git push $REMOTE $branch)
     save_logfile "$push"
     save_logfile "new commit $(git rev-parse $remoteBranch)"
   fi
@@ -76,22 +75,28 @@ main (){
   do
     # todo: add a global variable that store the lastcmmited date, lastFileChanged
     # also if last changed date is more thant 5s autocommit and if lasCommited date is more than a minute, autocommit
-
+    
+    # echo $(clear)
     local branch="$(git rev-parse --abbrev-ref HEAD)"
     if [ "$branch" != 'master' ]
       then
-        echo $(clear)
-        echo "you are on $branch"
-        verify_auto_push
-        echo "sleeping 3s"
+        echo "You are on $branch and the remote $REMOTE"
+        echo "Sleeping 3s"
         verify_to_autocommit
+        verify_auto_push
         sleep 5s
       else
-        echo $(clear)
         echo "You are on master, change the branch to be able to auto save"
         sleep 10s
     fi
   done
 }
 
-main
+if [ ! -z $1 ] 
+then
+  REMOTE=$1
+else
+  REMOTE='origin';
+fi
+
+main $REMOTE
