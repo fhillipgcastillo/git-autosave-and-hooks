@@ -62,10 +62,10 @@ main (){
         verify_autocommit
         sleep 2s
         verify_auto_push
-        echo "sleeping 3s"\n\n
+        echo "sleeping 3s"
         sleep 5s
       else
-        echo "You are on master, change the branch to be able to auto save"\n\n
+        echo "You are on master, change the branch to be able to auto save"
         sleep 10s
     fi
   done
