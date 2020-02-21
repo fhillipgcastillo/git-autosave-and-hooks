@@ -50,13 +50,12 @@ auto_sync_branch () {
   remoteCommit=$(git rev-parse $remoteBranch)
   if [ x"$localCommit" = x"$remoteCommit" ]
   then
-    echo "$localCommit"
-    echo "$remoteCommit"
+    echo "changes are sync"
   else 
     echo "out of sync remote "
-    echo "local $localCommit"
-    echo "remote $remoteCommit"
   fi
+  echo "local $localCommit"
+  echo "remote $remoteCommit"
 }
 
 verify_auto_push () {
