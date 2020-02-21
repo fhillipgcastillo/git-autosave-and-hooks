@@ -35,14 +35,15 @@ verify_and_auto_create_remote_branch () {
   exist=$(git ls-remote --head origin $branch)
   if [ -z "$exist" ]
     then 
-      echo "branch desn't exist"
+      echo "branch doesn't exist"
+      echo "$(git push origin $branch)"
     else 
     echo "exist"
   fi
 }
 verify_auto_push () {
   local branch="$(git rev-parse --abbrev-ref HEAD)"
-  # local lastcommithash="$(git rev-parse origin/$branch)"
+  # local lastcommithash="$(git rev-parse origin/$branch)" #this is giving error
   # echo "last commit $lastcommithash"
   verify_and_auto_create_remote_branch
 }
