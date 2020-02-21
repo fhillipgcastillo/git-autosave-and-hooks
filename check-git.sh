@@ -28,10 +28,23 @@ auto_push_wip_changes(){
   echo $lastcommit
 }
 
+verify_and_auto_create_remote_branch () {
+   local branch="$(git rev-parse --abbrev-ref HEAD)"
+  # local LASTCOMMIT="$(git rev-parse origin/$branch)"
+  # echo "last commit $LASTCOMMIT"
+  exist=$(git ls-remote --head origin $branch)
+  if [ -z "$exist" ]
+    then 
+      echo "not exist"
+    else 
+    echo "exist"
+  fi
+}
 verify_auto_push () {
   local branch="$(git rev-parse --abbrev-ref HEAD)"
-  local LASTCOMMIT="$(git rev-parse origin/$branch)"
-  echo "last commit $LASTCOMMIT"
+  # local LASTCOMMIT="$(git rev-parse origin/$branch)"
+  # echo "last commit $LASTCOMMIT"
+  verify_and_auto_create_remote_branch
 }
 
 main (){
