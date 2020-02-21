@@ -49,6 +49,9 @@ auto_sync_branch () {
   if [ x"$(git rev-parse $branch)" = x"$(git rev-parse $remoteBranch)" ]
   then
     echo "out of sync remote"
+  else 
+    echo "$(git rev-parse $branch) "
+    echo "$(git rev-parse $remoteBranch)"
   fi
 }
 
