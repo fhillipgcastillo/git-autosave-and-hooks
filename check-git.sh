@@ -44,7 +44,7 @@ verify_and_auto_create_remote_branch () {
       save_logfile "$msg"
       echo msg
       push="$(git push origin $branch)"
-      save_logfile "$(echo $push)"
+      save_logfile "branch created to remote $branch"
       echo "$push"
     # else 
     #   echo "exist"
