@@ -42,8 +42,8 @@ verify_and_auto_create_remote_branch () {
 }
 verify_auto_push () {
   local branch="$(git rev-parse --abbrev-ref HEAD)"
-  # local LASTCOMMIT="$(git rev-parse origin/$branch)"
-  # echo "last commit $LASTCOMMIT"
+  local lastcommithash="$(git rev-parse origin/$branch)"
+  # echo "last commit $lastcommithash"
   verify_and_auto_create_remote_branch
 }
 
