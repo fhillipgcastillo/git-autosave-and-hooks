@@ -12,17 +12,15 @@ main (){
   # while [ true ]
   # do
     local LASTCOMMIT="$(git log -1 --oneline)"
-    echo "$LASTCOMMIT"
-    havechanges= $(verifychanges $LASTCOMMIT)
-    local hChanges=1
-    echo "have changes $havechanges eq $hChanges"
+    echo "last commit $LASTCOMMIT"
 
-    if [$havechanges -ne $hChanges ];
+    local CHANGED="$(git diff-index --name-only HEAD --)"
+    if [ -n "$CHANGED" ];
       then
         echo "found changes"
         # LASTCOMMIT=$(commit_wip_changes)
         # echo "last commit $LASTCOMMIT"
-      else 
+      else
         echo "No new changes found"
     fi
 
@@ -38,9 +36,9 @@ verifychanges () {
   git update-index -q --refresh
   local CHANGED="$(git diff-index --name-only HEAD --)"
   if [ -n "$CHANGED" ]; then
-    return "1"
+    return 1
   else
-    return "0"
+    return 0
   fi
 }
 
