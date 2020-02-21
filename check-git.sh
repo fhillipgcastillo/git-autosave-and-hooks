@@ -27,14 +27,6 @@ verify_autocommit () {
   fi
 }
 
-auto_push_wip_changes(){
-  local VN="$VN-mod"
-  # local COMMIT=$(git commit -am"WIP - automated saved")
-  echo "commit done $COMMIT"
-  local lastcommit=$(git log -1 --oneline)
-  echo $lastcommit
-}
-
 verify_and_auto_create_remote_branch () {
   local branch=$1
   exist=$(git ls-remote --head origin $branch)
@@ -44,7 +36,8 @@ verify_and_auto_create_remote_branch () {
       save_logfile "$msg"
       echo msg
       push="$(git push origin $branch)"
-      save_logfile "branch created to remote $branch"
+      save_logfile "branch created to remote"
+      save_logfile "$branch"
       echo "$push"
     # else 
     #   echo "exist"
@@ -67,8 +60,8 @@ auto_sync_branch () {
     # echo "local $localCommit"
     # echo "remote $remoteCommit"
     save_logfile "Syncing branch commits"
-    push="$(git push origin $branch)"
-    save_logfile "$(echo $push)"
+    push=$(git push origin $branch)
+    save_logfile "$push"
     save_logfile "new commit $(git rev-parse $remoteBranch)"
   fi
 }
