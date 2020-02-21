@@ -68,7 +68,7 @@ auto_sync_branch () {
     # echo "remote $remoteCommit"
     save_logfile "Syncing branch commits"
     push="$(git push origin $branch)"
-    save_logfile "$(echo $push)"
+    save_logfile "$(echo \"$push\")"
     save_logfile "new commit $(git rev-parse $remoteBranch)"
   fi
 }
