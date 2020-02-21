@@ -2,7 +2,7 @@
 
 save_logfile () {
   today=$(date +"%F")
-  nowt=$(date +"%T")
+  nowt=$(date)
   LOGFILE="$today.log"
   echo "$(echo "$nowt - $1" >> $today-autosave.log)"
 }
