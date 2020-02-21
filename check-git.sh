@@ -75,6 +75,9 @@ verify_auto_push () {
 main (){
   while [ true ]
   do
+    # todo: add a global variable that store the lastcmmited date, lastFileChanged
+    # also if last changed date is more thant 5s autocommit and if lasCommited date is more than a minute, autocommit
+    
     local branch="$(git rev-parse --abbrev-ref HEAD)"
     if [ "$branch" != 'master' ]
       then
@@ -82,9 +85,8 @@ main (){
         echo "you are on $branch"
         verify_auto_push
         echo "sleeping 3s"
-        sleep 5s
         verify_autocommit
-        sleep 2s
+        sleep 5s
       else
         echo $(clear)
         echo "You are on master, change the branch to be able to auto save"
