@@ -1,11 +1,17 @@
 #!/bin/sh
 
+save_logfile () {
+  today=$(date +"%F")
+  nowt=$(date +"%T")
+  LOGFILE="$today.log"
+  echo "$(echo "$nowt - $1" >> log-$today.log)"
+}
+
 auto_commit_wip_changes(){
   local VN="$VN-mod"
   local COMMIT=$(git commit -am"WIP - automated saved")
+  save_logfile "$COMMIT"
   echo "commit done $COMMIT"
-  lastcommit=$(git log -1 --oneline)
-  echo $lastcommit
 }
 
 verify_autocommit () {
@@ -14,6 +20,7 @@ verify_autocommit () {
   if [ -n "$CHANGED" ];
     then
       echo "found changes"
+      save_logfile "Found new changes"
       auto_commit_wip_changes
     else
       echo "No new changes found"
@@ -33,8 +40,12 @@ verify_and_auto_create_remote_branch () {
   exist=$(git ls-remote --head origin $branch)
   if [ -z "$exist" ]
     then 
-      echo "branch doesn't exist"
-      echo "$(git push origin $branch)"
+      msg = "branch doesn't exist"
+      save_logfile "$msg"
+      echo msg
+      local push="$(git push origin $branch)"
+      save_logfile "$push"
+      echo "$push"
     # else 
     #   echo "exist"
   fi
@@ -55,7 +66,9 @@ auto_sync_branch () {
     echo "syncing branch"
     # echo "local $localCommit"
     # echo "remote $remoteCommit"
-    echo "$(git push origin $branch)"
+    save_logfile "Syncing branch commits"
+    push="$(git push origin $branch)"
+    save_logfile "$push"
   fi
 }
 
@@ -73,11 +86,11 @@ main (){
       then
         echo $(clear)
         echo "you are on $branch"
-        verify_autocommit
-        sleep 2s
         verify_auto_push
         echo "sleeping 3s"
         sleep 5s
+        verify_autocommit
+        sleep 2s
       else
         echo $(clear)
         echo "You are on master, change the branch to be able to auto save"
