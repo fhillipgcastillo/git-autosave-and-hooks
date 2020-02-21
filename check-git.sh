@@ -58,7 +58,7 @@ main (){
     local branch="$(git rev-parse --abbrev-ref HEAD)"
     if [ "$branch" != 'master' ]
       then
-        echo "$clear"
+        echo $(clear)
         echo "you are on $branch"
         verify_autocommit
         sleep 2s
@@ -66,7 +66,7 @@ main (){
         echo "sleeping 3s"
         sleep 5s
       else
-        echo "$clear"
+        echo $(clear)
         echo "You are on master, change the branch to be able to auto save"
         sleep 10s
     fi
