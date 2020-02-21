@@ -13,8 +13,8 @@ auto_commit_wip_changes(){
   echo "commit done $COMMIT"
 }
 
-verify_autocommit () {
-  # $1 => lastcommit cached
+verify_to_autocommit () {
+  # verify for new files changes
   local CHANGED="$(git diff-index --name-only HEAD --)"
   if [ -n "$CHANGED" ];
     then
@@ -84,7 +84,7 @@ main (){
         echo "you are on $branch"
         verify_auto_push
         echo "sleeping 3s"
-        verify_autocommit
+        verify_to_autocommit
         sleep 5s
       else
         echo $(clear)
