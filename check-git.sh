@@ -35,7 +35,7 @@ verify_and_auto_create_remote_branch () {
   exist=$(git ls-remote --head origin $branch)
   if [ -z "$exist" ]
     then 
-      echo "not exist"
+      echo "branch desn't exist"
     else 
     echo "exist"
   fi
