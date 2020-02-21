@@ -24,7 +24,7 @@ auto_push_wip_changes(){
   local VN="$VN-mod"
   # local COMMIT=$(git commit -am"WIP - automated saved")
   echo "commit done $COMMIT"
-  lastcommit=$(git log -1 --oneline)
+  local lastcommit=$(git log -1 --oneline)
   echo $lastcommit
 }
 
