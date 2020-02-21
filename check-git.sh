@@ -42,8 +42,8 @@ verify_and_auto_create_remote_branch () {
 
 auto_sync_branch () {
   echo "auto sync $1"
-  $branch="$1"
-  $remoteBranch="origin/$1"
+  branch="$1"
+  remoteBranch="origin/$1"
   # local lastcommithash="$(git rev-parse origin/$branch)" #this is giving error
   # echo "last commit $lastcommithash"
   if [ x"$(git rev-parse $branch)" = x"$(git rev-parse $remoteBranch)" ]
