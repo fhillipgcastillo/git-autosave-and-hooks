@@ -3,7 +3,6 @@
 save_logfile () {
   today=$(date +"%F")
   nowt=$(date)
-  LOGFILE="$today.log"
   echo "$(echo "$nowt - $1" >> $today-autosave.log)"
 }
 
@@ -77,7 +76,7 @@ main (){
   do
     # todo: add a global variable that store the lastcmmited date, lastFileChanged
     # also if last changed date is more thant 5s autocommit and if lasCommited date is more than a minute, autocommit
-    
+
     local branch="$(git rev-parse --abbrev-ref HEAD)"
     if [ "$branch" != 'master' ]
       then
