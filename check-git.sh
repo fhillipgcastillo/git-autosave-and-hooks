@@ -40,11 +40,16 @@ verify_and_auto_create_remote_branch () {
   fi
 }
 
+auto_sync_branch () {
+  echo "auto sync $1"
+}
+
 verify_auto_push () {
   local branch="$(git rev-parse --abbrev-ref HEAD)"
   # local lastcommithash="$(git rev-parse origin/$branch)" #this is giving error
   # echo "last commit $lastcommithash"
   verify_and_auto_create_remote_branch
+  auto_sync_branch "$branch"
 }
 
 main (){
@@ -58,10 +63,10 @@ main (){
         sleep 2s
         verify_auto_push
         echo "sleeping 3s"\n\n
-        sleep 2s
+        sleep 5s
       else
         echo "You are on master, change the branch to be able to auto save"\n\n
-        sleep 3s
+        sleep 10s
     fi
   done
 }
