@@ -29,18 +29,17 @@ auto_push_wip_changes(){
 }
 
 verify_and_auto_create_remote_branch () {
-   local branch="$(git rev-parse --abbrev-ref HEAD)"
-  # local LASTCOMMIT="$(git rev-parse origin/$branch)"
-  # echo "last commit $LASTCOMMIT"
+  local branch="$(git rev-parse --abbrev-ref HEAD)"
   exist=$(git ls-remote --head origin $branch)
   if [ -z "$exist" ]
     then 
       echo "branch doesn't exist"
       echo "$(git push origin $branch)"
-    else 
-    echo "exist"
+    # else 
+    #   echo "exist"
   fi
 }
+
 verify_auto_push () {
   local branch="$(git rev-parse --abbrev-ref HEAD)"
   # local lastcommithash="$(git rev-parse origin/$branch)" #this is giving error
