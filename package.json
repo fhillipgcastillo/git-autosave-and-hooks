@@ -1,0 +1,27 @@
+{
+  "name": "git-autosave-and-hooks",
+  "version": "1.0.0",
+  "description": "Mantain synced all development branch no matter the machine by maching commit to any changes on the branch",
+  "main": "check-git.sh",
+  "scripts": {
+    "start": "sh check-git.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fhillipgcastillo/git-autosave-and-hooks.git"
+  },
+  "keywords": [
+    "git",
+    "autosave",
+    "sync",
+    "autosync",
+    "fhillip"
+  ],
+  "author": "Fhillip G. Castillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fhillipgcastillo/git-autosave-and-hooks/issues"
+  },
+  "homepage": "https://github.com/fhillipgcastillo/git-autosave-and-hooks#readme"
+}
