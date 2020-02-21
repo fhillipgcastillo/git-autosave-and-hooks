@@ -44,7 +44,7 @@ verify_and_auto_create_remote_branch () {
       save_logfile "$msg"
       echo msg
       push="$(git push origin $branch)"
-      save_logfile "$push"
+      save_logfile "$(echo $push)"
       echo "$push"
     # else 
     #   echo "exist"
@@ -68,7 +68,8 @@ auto_sync_branch () {
     # echo "remote $remoteCommit"
     save_logfile "Syncing branch commits"
     push="$(git push origin $branch)"
-    save_logfile "$push"
+    save_logfile "$(echo $push)"
+    save_logfile "new commit"
   fi
 }
 
