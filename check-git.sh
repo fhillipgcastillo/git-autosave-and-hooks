@@ -14,7 +14,7 @@ auto_commit_wip_changes(){
 }
 
 verify_to_autocommit () {
-  # verify for new files changes
+  # verify for new files changes to commit
   local CHANGED="$(git diff-index --name-only HEAD --)"
   if [ -n "$CHANGED" ];
     then
