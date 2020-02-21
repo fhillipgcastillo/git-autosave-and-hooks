@@ -1,45 +1,55 @@
 #!/bin/sh
 
-commit_wip_changes(){
+auto_commit_wip_changes(){
   local VN="$VN-mod"
   local COMMIT=$(git commit -am"WIP - automated saved")
   echo "commit done $COMMIT"
   lastcommit=$(git log -1 --oneline)
-  return $lastcommit
+  echo $lastcommit
+}
+
+verify_autocommit () {
+  # $1 => lastcommit cached
+  local CHANGED="$(git diff-index --name-only HEAD --)"
+  if [ -n "$CHANGED" ];
+    then
+      echo "found changes"
+      auto_commit_wip_changes
+    else
+      echo "No new changes found"
+  fi
+}
+
+auto_push_wip_changes(){
+  local VN="$VN-mod"
+  # local COMMIT=$(git commit -am"WIP - automated saved")
+  echo "commit done $COMMIT"
+  lastcommit=$(git log -1 --oneline)
+  echo $lastcommit
+}
+
+verify_auto_push () {
+  local LASTCOMMIT="$(git log -1 --oneline)"
+  echo "last commit $LASTCOMMIT"
 }
 
 main (){
-  # while [ true ]
-  # do
-    local LASTCOMMIT="$(git log -1 --oneline)"
-    echo "last commit $LASTCOMMIT"
-
-    local CHANGED="$(git diff-index --name-only HEAD --)"
-    if [ -n "$CHANGED" ];
+  while [ true ]
+  do
+    local branch="$(git rev-parse --abbrev-ref HEAD)"
+    if [ "$branch" != 'master' ]
       then
-        echo "found changes"
-        # LASTCOMMIT=$(commit_wip_changes)
-        # echo "last commit $LASTCOMMIT"
+        echo "you are on $branch"
+        verify_autocommit
+        sleep 2s
+        verify_auto_push
+        echo "sleeping 3s"\n\n
+        sleep 2s
       else
-        echo "No new changes found"
+        echo "You are on master, change the branch to be able to auto save"\n\n
+        sleep 3s
     fi
-
-    echo "sleeping 5s"
-    SLEEP 3s
-  # done
-}
-
-verifychanges () {
-  # $1 => lastcommit cached
-  local VN=$(git describe --abbrev=7 HEAD 2>/dev/null)
-  local lastcommit="$(git log -1 --oneline)"
-  git update-index -q --refresh
-  local CHANGED="$(git diff-index --name-only HEAD --)"
-  if [ -n "$CHANGED" ]; then
-    return 1
-  else
-    return 0
-  fi
+  done
 }
 
 main
