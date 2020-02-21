@@ -4,7 +4,7 @@
   "description": "Mantain synced all development branch no matter the machine by maching commit to any changes on the branch",
   "main": "check-git.sh",
   "scripts": {
-    "build": "./check-git.sh",
+    "start": "sh check-git.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
