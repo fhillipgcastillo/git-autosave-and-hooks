@@ -38,8 +38,6 @@ verify_and_auto_create_remote_branch () {
       save_logfile "branch created to remote"
       save_logfile "$branch"
       echo "$push"
-    # else 
-    #   echo "exist"
   fi
 }
 
@@ -75,8 +73,7 @@ main (){
   do
     # todo: add a global variable that store the lastcmmited date, lastFileChanged
     # also if last changed date is more thant 5s autocommit and if lasCommited date is more than a minute, autocommit
-    
-    # echo $(clear)
+    echo $(clear)
     local branch="$(git rev-parse --abbrev-ref HEAD)"
     if [ "$branch" != 'master' ]
       then
