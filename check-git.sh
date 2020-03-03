@@ -1,4 +1,6 @@
 #!/bin/sh
+# Author: Fhillip G. Castillo
+# Mail: gerson.fhillip@gmail.com
 
 save_logfile () {
   today=$(date +"%F")
