@@ -1,8 +1,3 @@
-## To do
-* Auto pull the changes
-* be able to pass remote name (like origin), the project path (with git) as params
-* research on how to run this as npm project
-
 ## How to use
 install with
   npm install git-autosave-and-hooks
@@ -22,7 +17,7 @@ Run it
   * * it will verify if  the branch is created in the remote, if not, it will push it
   * * anytime the local commit and the remote commit are different, it will automatically push the commits
 
-  ## TODO: Auto Pull
+  ## Auto Pull
   * any time there is diferences in local and remote, pull and push the last commits
   
 ### Good to have, source:
