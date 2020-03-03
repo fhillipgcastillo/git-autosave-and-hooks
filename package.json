@@ -1,6 +1,6 @@
 {
   "name": "git-autosave-and-hooks",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Mantain synced all development branch no matter the machine by maching commit to any changes on the branch",
   "main": "check-git.sh",
   "scripts": {
