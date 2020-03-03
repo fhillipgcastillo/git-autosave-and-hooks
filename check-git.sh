@@ -31,6 +31,7 @@ verify_to_autocommit () {
 verify_and_auto_create_remote_branch () {
   local branch=$1
   exist=$(git ls-remote --head $REMOTE $branch)
+
   if [ -z "$exist" ]
     then 
       msg = "branch doesn't exist"
@@ -40,6 +41,7 @@ verify_and_auto_create_remote_branch () {
       save_logfile "branch created to remote"
       save_logfile "$branch"
       echo "$push"
+
   fi
 }
 
